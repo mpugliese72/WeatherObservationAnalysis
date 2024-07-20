@@ -1,10 +1,36 @@
 ﻿@page "/weatherobservation"
 
-<h3>Weather Observation</h3>
+@* <h3>Weather Observation</h3> *@
 
 <section>
     <div class="section__inner">
-        <p>@test</p>
+        <h1>Closest Weather Station (Given Location)</h1>
+        <table>
+            <tr>
+                <th>Weather Station</th>
+                <th>Given Location</th>
+            </tr>
+            <tr>
+                <td>@stationId</td>
+                <td>@stationName</td>
+            </tr>
+        </table>
+        <br />
+        <h1>Historical Weather Observations (Closest Weather Station)</h1>
+        <table>
+            <tr>
+                <th>Weather Station</th>
+                <th>Given Location</th>
+                <th>Temperature Unit Code</th>
+                <th>Temperature Value</th>
+            </tr>
+            <tr>
+                <td>@stationId</td>
+                <td>@stationName</td>
+                <td>@tempUnitCode</td>
+                <td>@tempValue</td>
+            </tr>
+        </table>
     </div>
 </section>
 
