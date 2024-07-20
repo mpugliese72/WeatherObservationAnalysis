@@ -8,7 +8,6 @@ namespace WeatherObservationAnalysis.Services
 {
     public class NWSDetailsService
     {
-        //[Inject]
         private IConfiguration configuration { get; set; } = default!;
 
         private readonly HttpClient? httpClient;
