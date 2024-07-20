@@ -26,16 +26,16 @@ namespace WeatherObservationAnalysis.Services
 
         public async Task<WeatherStation> GetClosestWeatherStation(string location)
         {
-            HttpRequest request = null;
+            //HttpRequest request = null;
 
-            var test = request?.Headers.UserAgent.ToString();
+            //var test = request?.Headers.UserAgent.ToString();
             
-            var test2 = request?.Headers.GetCommaSeparatedValues("User-Agent");
+            //var test2 = request?.Headers.GetCommaSeparatedValues("User-Agent");
 
             using HttpResponseMessage response =
                 await httpClient.GetAsync(closestWeatherStationURL + location);
 
-            response.EnsureSuccessStatusCode();
+            //response.EnsureSuccessStatusCode();
 
             var results = await response.Content.ReadFromJsonAsync<WeatherStation>();
             return results;

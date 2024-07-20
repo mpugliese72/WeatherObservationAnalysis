@@ -8,6 +8,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddHttpClient();
+builder.Services.AddCors();
 
 builder.Services.AddScoped<NWSDetailsService>();
 
@@ -24,6 +25,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseCors();
+
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
