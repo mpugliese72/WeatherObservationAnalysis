@@ -35,8 +35,8 @@ namespace WeatherObservationAnalysis.Services
             BaseUrl = configuration.GetValue<string>("NWSAPI:BaseUrl");
 
             this.closestWeatherStationURL = $"{BaseUrl}stations/";
-            this.histWeatherObsPrefixURL = $"{BaseUrl}stations/stationId/observations/"; 
-            //this.histWeatherObsSuffixURL = "/observations/{0}/{1}/{2}/{3}";
+            this.histWeatherObsPrefixURL = $"{BaseUrl}stations/" + stationId; 
+            this.histWeatherObsSuffixURL = "/observations/";
         }
 
         public async Task<Stations> GetClosestWeatherStation(string location)
@@ -63,13 +63,13 @@ namespace WeatherObservationAnalysis.Services
             return result;
         }
 
-        public async Task<Stations> GetHistWeatherObservations(string location, 
-            string start, string end, int limit)
+        public async Task<Stations> GetHistWeatherObservations(string location) 
+            
         {
-            Stations result = new Stations();
+            Stations histResult = new Stations();
 
-            var url = string.Format(histWeatherObsPrefixURL + start + "/" + end + 
-                "/" + limit + "/" + location);
+            var url = string.Format(histWeatherObsPrefixURL + location + 
+                                    histWeatherObsSuffixURL);
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             request.Headers.Add("Accept", "application/geo+json");
@@ -83,10 +83,10 @@ namespace WeatherObservationAnalysis.Services
             {
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
-                result = JsonSerializer.Deserialize<Stations>(stringResponse);
+                histResult = JsonSerializer.Deserialize<Stations>(stringResponse);
             }
 
-            return result;
+            return histResult;
         }
     }
 }
