@@ -2,6 +2,7 @@
 {
     public class Properties
     {
+        public string geometry { get; set; } = default!;
         public string id { get; set; } = default!;
         public string type { get; set; } = default!;
         public Elevation elevation { get; set; } = default!;
@@ -16,5 +17,8 @@
         public WindDirection windDirection { get; set; } = default!;
         public WindGust windGust { get; set; } = default!;
         public BarometricPressure barometricPressure { get; set; } = default!;
+        public string timestamp { get; set; } = default!;
+        public string rawMessage { get;set; } = default!;
+        public string textDescription { get; set; } = default!;
     }
 }

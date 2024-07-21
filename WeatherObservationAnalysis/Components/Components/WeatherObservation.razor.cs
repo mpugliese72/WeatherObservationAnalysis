@@ -18,12 +18,12 @@ namespace WeatherObservationAnalysis.Components.Components
         public decimal? tempValue { get; set; }
 
         public Stations result { get; set; } = new();
-        public Stations histResult { get; set; } = new();
+        public Features histResult { get; set; } = new();
         protected override async Task OnInitializedAsync()
         {
-            await GetClosestWeatherStation("0007W");
+            //await GetClosestWeatherStation("0007W");
             await GetHistWeatherObservations("0007W");
-                //"2024-07-19T00:00:00-00:00","2024-07-19T00:00:00-00:00", 10);
+                //"2024-07-19T00:00:00-00:00","2024-07-20T00:00:00-00:00", 10);
         }
 
         public async Task<Stations> GetClosestWeatherStation(string location)
@@ -36,7 +36,7 @@ namespace WeatherObservationAnalysis.Components.Components
             return result;
         }
 
-        public async Task<Stations> GetHistWeatherObservations(string location)
+        public async Task<Features> GetHistWeatherObservations(string location)
         {
             histResult = await NWSDetailsService.GetHistWeatherObservations(location);
 
@@ -48,7 +48,7 @@ namespace WeatherObservationAnalysis.Components.Components
             tempUnitCode = histResult.properties.temperature.unitCode;
             tempValue = histResult.properties.temperature.value;
 
-            return result;
+            return histResult;
         }
     }
 }
