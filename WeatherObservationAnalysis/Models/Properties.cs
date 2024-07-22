@@ -21,5 +21,8 @@
         //public WindDirection windDirection { get; set; } = default!;
         //public WindGust windGust { get; set; } = default!;
         //public BarometricPressure barometricPressure { get; set; } = default!;
+
+        public MaxTemperatureLast24Hrs maxTempLast24Hrs { get; set; } = new();
+        public MinTemperatureLast24Hrs minTempLast24Hrs { get; set; } = new();
     }
 }

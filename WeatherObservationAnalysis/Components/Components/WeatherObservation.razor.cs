@@ -22,11 +22,12 @@ namespace WeatherObservationAnalysis.Components.Components
         public Feature histResult { get; set; } = new();
         public string? station { get; set; }
         public string? timestamp { get; set; }
+        public string? unitCode { get; set; }
+        public decimal? value { get; set; }
         protected override async Task OnInitializedAsync()
         {
             await GetClosestWeatherStation("0007W");
             await GetHistWeatherObservations("0007W");
-                
         }
 
         public async Task<Stations> GetClosestWeatherStation(string location)
@@ -47,7 +48,9 @@ namespace WeatherObservationAnalysis.Components.Components
             histStationType = histResult.features[0].type;
             station = histResult.features[0].properties.station;
             timestamp = histResult.features[0].properties.timestamp;
- 
+            unitCode = histResult.features[0].properties.maxTempLast24Hrs.unitCode;
+            value = histResult.features[0].properties.maxTempLast24Hrs.value;
+
             return histResult;
         }
     }

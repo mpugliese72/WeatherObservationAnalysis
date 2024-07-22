@@ -1,0 +1,8 @@
+﻿namespace WeatherObservationAnalysis.Models
+{
+    public class MaxTemperatureLast24Hrs
+    {
+        public string unitCode { get; set; } = default!;
+        public decimal value { get; set; } = default!;
+    }
+}
