@@ -1,6 +1,11 @@
 ﻿@page "/weatherobservation"
 
 @* <h3>Weather Observation</h3> *@
+<style>
+    th, td {
+        border: 1px solid black;
+    }
+</style>
 
 <section>
     <div class="section__inner">
@@ -19,16 +24,16 @@
         <h1>Historical Weather Observations (Closest Weather Station)</h1>
         <table>
             <tr>
-                <th>Weather Station</th>
-                <th>Given Location</th>
-                <th>Temperature Unit Code</th>
-                <th>Temperature Value</th>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Station</th>
+                <th>Timestamp</th>
             </tr>
             <tr>
                 <td>@histStationId</td>
-                <td>@histStationName</td>
-                <td>@tempUnitCode</td>
-                <td>@tempValue</td>
+                <td>@histStationType</td>
+                <td>@station</td>
+                <td>@timestamp</td>
             </tr>
         </table>
     </div>

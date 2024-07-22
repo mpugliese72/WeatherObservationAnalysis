@@ -15,7 +15,6 @@ namespace WeatherObservationAnalysis.Services
         private readonly IHttpClientFactory clientFactory; 
 
         private readonly HttpClient? httpClient;
-
         private string? stationId { get; set; }
         private string? start { get; set; }
         private string? end { get; set; }
@@ -63,9 +62,9 @@ namespace WeatherObservationAnalysis.Services
             return result;
         }
 
-        public async Task<Features> GetHistWeatherObservations(string location) 
+        public async Task<Feature> GetHistWeatherObservations(string location) 
         {
-            Features histResult = new Features();
+            Feature histResult = new Feature();
 
             var url = string.Format(histWeatherObsPrefixURL + location + histWeatherObsSuffixURL);
 
@@ -81,7 +80,7 @@ namespace WeatherObservationAnalysis.Services
             {
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
-                histResult = JsonSerializer.Deserialize<Features>(stringResponse);
+                histResult = JsonSerializer.Deserialize<Feature>(stringResponse);
             }
 
             return histResult;

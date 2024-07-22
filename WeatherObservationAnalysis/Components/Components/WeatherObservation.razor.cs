@@ -13,17 +13,20 @@ namespace WeatherObservationAnalysis.Components.Components
         public string? stationName { get; set; }
 
         public string? histStationId { get; set; }
+        public string? histStationType { get; set; }
         public string? histStationName { get; set; }
+        public string? histTimestamp { get; set; }
         public string? tempUnitCode { get; set; }
         public decimal? tempValue { get; set; }
-
         public Stations result { get; set; } = new();
-        public Features histResult { get; set; } = new();
+        public Feature histResult { get; set; } = new();
+        public string? station { get; set; }
+        public string? timestamp { get; set; }
         protected override async Task OnInitializedAsync()
         {
-            //await GetClosestWeatherStation("0007W");
+            await GetClosestWeatherStation("0007W");
             await GetHistWeatherObservations("0007W");
-                //"2024-07-19T00:00:00-00:00","2024-07-20T00:00:00-00:00", 10);
+                
         }
 
         public async Task<Stations> GetClosestWeatherStation(string location)
@@ -36,18 +39,15 @@ namespace WeatherObservationAnalysis.Components.Components
             return result;
         }
 
-        public async Task<Features> GetHistWeatherObservations(string location)
+        public async Task<Feature> GetHistWeatherObservations(string location)
         {
             histResult = await NWSDetailsService.GetHistWeatherObservations(location);
 
-            //Stations histResults = new Stations();
-            //histResults = result;
-
-            histStationId = histResult.properties.stationIdentifier;
-            histStationName = histResult.properties.name;
-            tempUnitCode = histResult.properties.temperature.unitCode;
-            tempValue = histResult.properties.temperature.value;
-
+            histStationId = histResult.features[0].id;
+            histStationType = histResult.features[0].type;
+            station = histResult.features[0].properties.station;
+            timestamp = histResult.features[0].properties.timestamp;
+ 
             return histResult;
         }
     }
