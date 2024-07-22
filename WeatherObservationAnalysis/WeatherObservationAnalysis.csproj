@@ -6,12 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Models\MaxTemperatureLast24Hrs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Models\MaxTemperatureLast24Hrs" />
-  </ItemGroup>
-
 </Project>

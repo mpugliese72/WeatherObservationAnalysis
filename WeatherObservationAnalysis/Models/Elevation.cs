@@ -2,10 +2,10 @@
 {
     public class Elevation
     {
-        public string geometry { get; set; } = default!;
-        public string unitCode { get; set; } = default!;
-        public decimal value { get;set; } = default!;
-        public decimal maxValue { get; set; } = default!;
-        public decimal minValue { get; set; } = default!;
+        public string? geometry { get; set; }
+        public string? unitCode { get; set; }
+        public decimal? value { get;set; }
+        public decimal? maxValue { get; set; }
+        public decimal? minValue { get; set; }
     }
 }

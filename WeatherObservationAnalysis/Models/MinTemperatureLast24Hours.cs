@@ -1,9 +1,8 @@
 ﻿namespace WeatherObservationAnalysis.Models
 {
-    public class DewPoint
+    public class MinTemperatureLast24Hours
     {
         public string? unitCode { get; set; }
         public decimal? value { get; set; }
-        public string? qualityControl { get; set; }
     }
 }

@@ -11,15 +11,14 @@ namespace WeatherObservationAnalysis.Components.Components
         public HttpClient? HttpClient { get; set; }
         public string? stationId { get; set; }
         public string? stationName { get; set; }
-
         public string? histStationId { get; set; }
         public string? histStationType { get; set; }
         public string? histStationName { get; set; }
         public string? histTimestamp { get; set; }
         public string? tempUnitCode { get; set; }
         public decimal? tempValue { get; set; }
-        public Stations result { get; set; } = new();
-        public Feature histResult { get; set; } = new();
+        public Stations results { get; set; } = new();
+        public Feature histResults { get; set; } = new();
         public string? station { get; set; }
         public string? timestamp { get; set; }
         public string? unitCode { get; set; }
@@ -32,26 +31,29 @@ namespace WeatherObservationAnalysis.Components.Components
 
         public async Task<Stations> GetClosestWeatherStation(string location)
         {
-            result = await NWSDetailsService.GetClosestWeatherStation(location);
+            results = await NWSDetailsService.GetClosestWeatherStation(location);
 
-            stationId = result.properties.stationIdentifier;
-            stationName = result.properties.name;
+            stationId = results.properties.stationIdentifier;
+            stationName = results.properties.name;
 
-            return result;
+            return results;
         }
 
         public async Task<Feature> GetHistWeatherObservations(string location)
         {
-            histResult = await NWSDetailsService.GetHistWeatherObservations(location);
+            histResults = await NWSDetailsService.GetHistWeatherObservations(location);
 
-            histStationId = histResult.features[0].id;
-            histStationType = histResult.features[0].type;
-            station = histResult.features[0].properties.station;
-            timestamp = histResult.features[0].properties.timestamp;
-            unitCode = histResult.features[0].properties.maxTempLast24Hrs.unitCode;
-            value = histResult.features[0].properties.maxTempLast24Hrs.value;
+            station = histResults.features[0].properties.station;
+            timestamp = histResults.features[0].properties.timestamp;
+            unitCode = histResults.features[0].properties.maxTemperatureLast24Hours.unitCode;
+            value = histResults.features[0].properties.maxTemperatureLast24Hours.value;
 
-            return histResult;
+            if (value == null)
+            {
+                value = 0;
+            }
+
+            return histResults;
         }
     }
 }

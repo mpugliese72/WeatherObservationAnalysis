@@ -3,7 +3,7 @@
     public class Stations
     {
         public Properties properties { get; set; } = new();
-        
-        //public Elevation elevation { get; set; } = default!;
+
+        public Elevation elevation { get; set; } = new();
     }
 }

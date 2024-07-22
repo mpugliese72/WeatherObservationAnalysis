@@ -22,6 +22,8 @@ namespace WeatherObservationAnalysis.Services
         private string? closestWeatherStationURL { get; set; }
         private string? histWeatherObsPrefixURL { get; set; }
         private string? histWeatherObsSuffixURL { get; set; }
+
+        public Feature histResults { get; set; }
         private string? BaseUrl { get; set; }
 
         public NWSDetailsService(HttpClient _httpClient, IConfiguration _configuration,
@@ -40,7 +42,7 @@ namespace WeatherObservationAnalysis.Services
 
         public async Task<Stations> GetClosestWeatherStation(string location)
         {
-            Stations result = new Stations();
+            Stations results = default!;
             
             var url = string.Format(closestWeatherStationURL + location);
 
@@ -56,16 +58,14 @@ namespace WeatherObservationAnalysis.Services
             {
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
-                result = JsonSerializer.Deserialize<Stations>(stringResponse);
+                results = JsonSerializer.Deserialize<Stations>(stringResponse);
             }
 
-            return result;
+            return results;
         }
 
         public async Task<Feature> GetHistWeatherObservations(string location) 
         {
-            Feature histResult = new Feature();
-
             var url = string.Format(histWeatherObsPrefixURL + location + histWeatherObsSuffixURL);
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -80,10 +80,10 @@ namespace WeatherObservationAnalysis.Services
             {
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
-                histResult = JsonSerializer.Deserialize<Feature>(stringResponse);
+                histResults = JsonSerializer.Deserialize<Feature>(stringResponse);
             }
 
-            return histResult;
+            return histResults;
         }
     }
 }
